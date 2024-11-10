@@ -1,4 +1,7 @@
 # 📺 Baixador de Vídeos do YouTube
+![Status do Projeto](https://img.shields.io/badge/Status-Concluido-green)
+![Python Version](https://img.shields.io/badge/Python-3.8+-blue)
+![License](https://img.shields.io/badge/License-MIT-green)
 
 Uma aplicação desktop simples desenvolvida em Python que permite baixar vídeos do YouTube e converter para diferentes formatos de áudio/vídeo.
 
