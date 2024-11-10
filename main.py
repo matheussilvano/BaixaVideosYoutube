@@ -5,6 +5,7 @@ from tkinter import messagebox
 
 def baixar_video():
     url = entrada_link.get("1.0", "end-1c")
+    nome_aquivo = entrada_escolher_nome.get("1.0", "end-1c")
     formato = formato_var.get()
 
     if not url:
@@ -14,19 +15,19 @@ def baixar_video():
     try:
         yt = pytubefix.YouTube(url)
         if formato == "wav":
-            filename = "audio.wav"
+            filename = f"{nome_aquivo}.wav"
             stream = yt.streams.filter(only_audio=True).first().url
             ffmpeg.input(stream).output(filename, format='wav', loglevel="error").run()
             messagebox.showinfo("Sucesso", "Áudio baixado com sucesso em formato WAV!")
 
         elif formato == "mp3":
-            filename = "audio.mp3"
+            filename = f"{nome_aquivo}.mp3"
             stream = yt.streams.filter(only_audio=True).first().url
             ffmpeg.input(stream).output(filename, format='mp3', loglevel="error").run()
             messagebox.showinfo("Sucesso", "Áudio baixado com sucesso em formato MP3!")
 
         elif formato == "mp4":
-            filename = "video.mp4"
+            filename = f"{nome_aquivo}.mp4"
             stream = yt.streams.filter(progressive=True, file_extension='mp4').first().url
             ffmpeg.input(stream).output(filename, format='mp4', loglevel="error").run()
             messagebox.showinfo("Sucesso", "Vídeo baixado com sucesso em formato MP4!")
@@ -39,7 +40,7 @@ def baixar_video():
 
 root = tk.Tk()
 
-root.geometry("800x500") 
+root.geometry("800x600") 
 root.title("Baixar vídeos do Youtube")
 
 fonte_principal = 'Arial'
@@ -55,6 +56,12 @@ titulo_inserir_link.pack(padx=10, pady=10)
 
 entrada_link = tk.Text(root, width=width_botoes, height=1, font=(fonte_principal, tamanho_fonte_botoes))
 entrada_link.pack(padx=10)
+
+titulo_escolher_nome = tk.Label(root, text="Insira um nome para o arquivo:", font=(fonte_principal, 12))
+titulo_escolher_nome.pack(padx=10, pady=10)
+
+entrada_escolher_nome = tk.Text(root, width=width_botoes, height=1, font=(fonte_principal, tamanho_fonte_botoes))
+entrada_escolher_nome.pack(padx=10)
 
 titulo_selecionar_formato = tk.Label(root, text="Selecione o formato:", font=(fonte_principal, 12))
 titulo_selecionar_formato.pack(padx=10, pady=10)
